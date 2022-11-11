@@ -6,9 +6,9 @@ public class Item
 {
     public string name;
     public string type;
-    public float price;
+    public double price;
 
-    public Item(string itemName, string itemType, float itemPrice){
+    public Item(string itemName, double itemPrice, string itemType){
         this.name = itemName;
         this.type = itemType;
         this.price = itemPrice;
@@ -22,7 +22,7 @@ public class Item
         return type;
     }
 
-    public float getPrice(){
+    public double getPrice(){
         return price;
     }
 
