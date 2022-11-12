@@ -31,6 +31,8 @@ public class CustomerDisplay : MonoBehaviour
         System.Random randomGen = new System.Random(); // Random num generator
         int numberOfCustomers = randomGen.Next(minCustomers, maxCustomers); // Creating the amount of customers the player must get through
         
+        Debug.Log(numberOfCustomers);
+
         listOfCustomers = new Customer[numberOfCustomers]; // Created the arry for each customer
 
         for(int x = 0; x < listOfCustomers.Length; x++){
@@ -79,7 +81,7 @@ public class CustomerDisplay : MonoBehaviour
 
     void flushItemDisplay(){
         for(int x = 0; x < containerDisplay.childCount; x++){
-            GameObject.Destroy(containerDisplay.GetChild(x));
+            Destroy(containerDisplay.GetChild(x).gameObject);
         }
     }
 
@@ -88,7 +90,7 @@ public class CustomerDisplay : MonoBehaviour
     public void nextCustomer(){
         flushItemDisplay();
         customerTracker++;
-        if(customerTracker > listOfCustomers.Length){
+        if(customerTracker >= listOfCustomers.Length){
             customerTracker = 0;
         }
         displayCustomerOrder(customerTracker);
@@ -97,7 +99,7 @@ public class CustomerDisplay : MonoBehaviour
     public void previousCustomer(){
         flushItemDisplay();
         customerTracker--;
-        if(customerTracker < 0){
+        if(customerTracker <= 0){
             customerTracker = listOfCustomers.Length - 1;
         }
         displayCustomerOrder(customerTracker);

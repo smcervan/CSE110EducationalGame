@@ -81,7 +81,7 @@ public class Order
     private void createRandomOrder(){
         //Order Length
         int minLength = 1;
-        int maxLength = 10;
+        int maxLength = 9;
 
         //create order length
         System.Random rndLength = new System.Random();
