@@ -14,8 +14,8 @@ public class CustomerDisplay : MonoBehaviour
     int minCustomers = 1; // Minimum amount of Customers
     int maxCustomers = 6; // Maximum Amount of Customers
 
-    public int customerTracker = 0;
-    public GameObject navigationContainer;
+    //public int customerTracker = 0;
+    //public GameObject navigationContainer;
 
 
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class CustomerDisplay : MonoBehaviour
         Debug.Log(numberOfCustomers);
         listOfCustomers = new Customer[numberOfCustomers]; // Created the arry for each customer
 
-        showNavigationButtons();
+        //showNavigationButtons();
 
         for(int x = 0; x < listOfCustomers.Length; x++){
             listOfCustomers[x] = new Customer(randomNameGenerator()); // Refer to customer through index rather than variable name
@@ -90,6 +90,7 @@ public class CustomerDisplay : MonoBehaviour
         }
     }
 
+    /* GUI Customer Navigation
     void showNavigationButtons(){
         if(listOfCustomers.Length == 1){
             navigationContainer.SetActive(false);
@@ -115,5 +116,6 @@ public class CustomerDisplay : MonoBehaviour
         }
         displayCustomerOrder(customerTracker);
     }
+    */
 
 }
