@@ -13,7 +13,7 @@ public class Order
     public Order(){
         itemsAvailable = new ArrayList();
         addData(); //Assigns all items into the itemsAvailable ArrayList
-        getRandomOrder(); //Creates an order and fills the customerOrder array
+        createRandomOrder(); //Creates an order and fills the customerOrder array
     }
 
     private void addData(){
@@ -78,8 +78,7 @@ public class Order
         itemsAvailable.Add(tooth_paste);
     }
 
-   
-    private void getRandomOrder(){
+    private void createRandomOrder(){
         //Order Length
         int minLength = 1;
         int maxLength = 10;
@@ -104,5 +103,13 @@ public class Order
         foreach(Item currItem in customerOrder){
             Debug.Log(currItem.getName());
         }
+    }
+
+    public Item[] getOrder(){
+        return customerOrder;
+    }
+
+    public Item getItemAtIndex(int indexValue){
+        return customerOrder[indexValue];
     }
 }
