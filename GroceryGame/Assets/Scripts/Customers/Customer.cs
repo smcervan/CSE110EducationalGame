@@ -24,6 +24,10 @@ public class Customer
         return customerOrder.getOrder();
     }
 
+    public double getOrderTotal(){
+        return customerOrder.getOrderTotal();
+    }
+
     public string getName(){
         return customerName;
     }

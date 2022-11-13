@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CustomerDisplay : MonoBehaviour
+public class DisplayOrderOnTablet : MonoBehaviour
 {
 
     public Transform containerDisplay; // Parent Object
     public GameObject itemDisplay; //Instance Object
 
-    Customer[] listOfCustomers; //List of Customers
-    int minCustomers = 1; // Minimum amount of Customers
-    int maxCustomers = 6; // Maximum Amount of Customers
+    public Customer[] listOfCustomers; //List of Customers
 
     //public int customerTracker = 0;
     //public GameObject navigationContainer;
@@ -21,7 +19,8 @@ public class CustomerDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        createCustomers();
+        //displayCustomerOrder(0);
+        listOfCustomers = new RoundCustomers().listOfCustomers;
         displayCustomerOrder(0);
     }
 
@@ -29,34 +28,6 @@ public class CustomerDisplay : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void createCustomers(){
-        System.Random randomGen = new System.Random(); // Random num generator
-        int numberOfCustomers = randomGen.Next(minCustomers, maxCustomers); // Creating the amount of customers the player must get through
-        
-        Debug.Log(numberOfCustomers);
-        listOfCustomers = new Customer[numberOfCustomers]; // Created the arry for each customer
-
-        //showNavigationButtons();
-
-        for(int x = 0; x < listOfCustomers.Length; x++){
-            listOfCustomers[x] = new Customer(randomNameGenerator()); // Refer to customer through index rather than variable name
-        }
-
-    }
-
-    string randomNameGenerator(){ // This is pretty rad if you ask me
-        string name = "";
-        string[] firstNames = {"James", "Mary", "Robert", "Patricia", "John", "Jennifer", "Michael", "Linda", "David", "Elizabeth"};
-        string[] lastNames = {"Johnson", "Williams", "Davis", "Jones", "Garcia", "Martinez","Lee", "Sanchez", "Knight", "King"};
-        System.Random randomNum = new System.Random();
-
-        name += firstNames[randomNum.Next(0, 10)];
-        name += " ";
-        name += lastNames[randomNum.Next(0, 10)];
-
-        return name;
     }
 
     //Selecting a customer, getting their order, and passing it to the method that displays the order info
@@ -84,13 +55,16 @@ public class CustomerDisplay : MonoBehaviour
         itemNameText.text = item.getName(); // Updates the name text with the item's name
     }
 
+
+    // (Could be used for computer navigation)
+    /* GUI Customer Navigation
     void flushItemDisplay(){
         for(int x = 0; x < containerDisplay.childCount; x++){
             Destroy(containerDisplay.GetChild(x).gameObject);
         }
     }
 
-    /* GUI Customer Navigation
+    
     void showNavigationButtons(){
         if(listOfCustomers.Length == 1){
             navigationContainer.SetActive(false);

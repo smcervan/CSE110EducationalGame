@@ -112,4 +112,12 @@ public class Order
     public Item getItemAtIndex(int indexValue){
         return customerOrder[indexValue];
     }
+
+    public double getOrderTotal(){
+        double orderAmount = 0.00;
+        foreach(Item item in customerOrder){
+            orderAmount += item.getPrice();
+        }
+        return orderAmount;
+    }
 }
