@@ -1,0 +1,3 @@
+world space to camera (scale size too)
+Player comes near the computer (GUI and Functionality)
+Design computer face (functionality [see the customer, their orders, send it to the tablet, the "educational" part])
