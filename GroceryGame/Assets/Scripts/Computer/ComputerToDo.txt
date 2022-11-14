@@ -1,3 +1,15 @@
 world space to camera (scale size too)
 Player comes near the computer (GUI and Functionality)
 Design computer face (functionality [see the customer, their orders, send it to the tablet, the "educational" part])
+
+
+Educational part
+- Different coding parts
+  - starting index
+  - condition statement
+  - ending index (which kind of correlates to the conditional statement)
+  - assigning index to itemsToSend
+  - reference value for itemsToSend
+  - whole for loop?
+
+The

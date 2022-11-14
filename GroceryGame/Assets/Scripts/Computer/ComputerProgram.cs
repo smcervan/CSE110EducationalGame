@@ -19,6 +19,12 @@ public class ComputerProgram : MonoBehaviour
     public GameObject parentObject;
     public GameObject instantiatedTemplate;
 
+    // Gameobjecet , for selected customer side (educational side)
+    public GameObject selectedItemTemplate; //Instantiate Template for the selected customer's items
+    public Transform selectedObjectsParent; 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,8 @@ public class ComputerProgram : MonoBehaviour
     {
         
     }
+    
+    //Navigation for customer Selection
 
     private void showNavigationButtons(){
         if(listOfCustomers.Length == 1){
@@ -89,5 +97,39 @@ public class ComputerProgram : MonoBehaviour
         foreach(Item item in listOfCustomers[customerIndexValue].getOrder()){
             GameObject itemChild = Instantiate(instantiatedTemplate, parentObject.transform);
         }*/
+    }
+
+    // ---------- Selected Customer Screen ----------
+
+    //Get current customer, display objects to selected Screen
+    private void customerSelected(){
+        Customer currCustomer = listOfCustomers[customerTracker]; //This getting the current customer
+        Item[] currCustomerOrder = currCustomer.getOrder(); //Get the current customer's list of items
+
+        for(int x = 0;x < currCustomerOrder.Length; x++){
+            GameObject newSelectedItem = Instantiate(selectedItemTemplate, selectedObjectsParent);
+            
+            newSelectedItem.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = currCustomerOrder[x].getName();
+            newSelectedItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = x.ToString();
+        }
+    }
+
+    //When selecting the customers, will flush out previous data
+    private void flushSelectedItems(){
+        //This loop will delete the children from the parent obejct
+        foreach(Transform child in selectedObjectsParent){
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void showSelectedCustomersItems(){
+        flushSelectedItems();
+        customerSelected();
+    }
+
+    // ---------- Selected Customer Screen ----------
+
+    public void selectQuestions(){
+        
     }
 }
