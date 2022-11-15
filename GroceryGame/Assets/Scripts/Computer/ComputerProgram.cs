@@ -23,7 +23,8 @@ public class ComputerProgram : MonoBehaviour
     public GameObject selectedItemTemplate; //Instantiate Template for the selected customer's items
     public Transform selectedObjectsParent; 
 
-
+    public Question[] codingQuestions;
+    public GameObject[] codingObjects = new GameObject[5];
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +32,10 @@ public class ComputerProgram : MonoBehaviour
         listOfCustomers = new RoundCustomers().listOfCustomers; //Creates a new round of customers
         showNavigationButtons();
         fillCustomerInfo(customerTracker);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach(GameObject question in codingObjects){
+            question.SetActive(false);
+        }
     }
     
     //Navigation for customer Selection
@@ -112,24 +111,36 @@ public class ComputerProgram : MonoBehaviour
             newSelectedItem.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = currCustomerOrder[x].getName();
             newSelectedItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = x.ToString();
         }
+
+        codingObjects[customerTracker].SetActive(true); //Sets the current coding problem visible
     }
 
     //When selecting the customers, will flush out previous data
-    private void flushSelectedItems(){
+    private void flushSelectedItems(){ 
         //This loop will delete the children from the parent obejct
         foreach(Transform child in selectedObjectsParent){
             Destroy(child.gameObject);
         }
+
     }
 
+        //Shows the selected customers items
     public void showSelectedCustomersItems(){
         flushSelectedItems();
+        flushQuestion();
         customerSelected();
     }
 
-    // ---------- Selected Customer Screen ----------
-
+    // ---------- Coding Question Screen ----------
+        //For each customer, there will be a different question to add variety and practice
     public void selectQuestions(){
-        
+        CustomerCodeQuestion round1 = new CustomerCodeQuestion(listOfCustomers.Length); //Creates a new coding problem for each customer
+        codingQuestions = round1.getCodingQuestions(); //Gets the list of coding questions according to the customer's index
+    }
+
+    public void flushQuestion(){
+        foreach(GameObject questionObject in codingObjects){
+            questionObject.SetActive(false);
+        }
     }
 }

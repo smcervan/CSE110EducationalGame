@@ -4,12 +4,87 @@ Design computer face (functionality [see the customer, their orders, send it to 
 
 
 Educational part
-- Different coding parts
-  - starting index
+- Different coding parts (Each have a corresponding game object to it)
+  - starting index 
   - condition statement
   - ending index (which kind of correlates to the conditional statement)
   - assigning index to itemsToSend
   - reference value for itemsToSend
   - whole for loop?
 
-The
+for(int x = [INPUT FIELD]; x < [INPUT FIELD]; x++ ){
+  itemsToSend[INPUT FIELD] = [INPUT FIELD];  
+}
+
+Question 1
+- Set the starting index value
+for(int x = [INPUT FIELD]; x < order.length; x++){
+  itemsToSend[x] = order[x];
+}
+
+- Set the comparison operator
+for(int x = 0; x [INPUT FIELD] order.length; x++){
+  itemsToSend[x] = order[x];
+}
+
+- Set the incrementation
+for(int x = 0; x < order.length; [INPUT FIELD]){
+  itemsToSend[x] = order[x];
+}
+
+- Set the index value for the itemsToSend list (Inside the loop)
+for(int x = 0; x < order.length; x++){
+  itemsToSend[INPUT FIELD] = order[x];
+}
+
+- Set the index value from the order list (Inside the loop)
+for(int x = 0; x < order.length; x++){
+  itemsToSend[x] = order[INPUT FIELD];
+}
+
+
+Question 2 
+- Set the comparison according to the operator
+               v designed to change
+for(int x = 0; x < [INPUT FIELD]; x++){
+  itemsToSend[x] = order[x];
+}
+
+- Declare the starting index variable (which should be x and at 0)
+for([INPUT FIELD]; x < order.length; x++){
+  itemsToSend[x] = order[x];
+}
+
+Question 3:
+- Declare the order[x] assignment
+for(int x = 0; x < order.length; x++){
+  itemsToSend[x] = [INPUT FIELD];
+}
+
+- Declare the itemsToSend[x] assignment
+for(int x = 0; x < order.length; x++){
+  [INPUT FIELD] = order[x];
+}
+
+- Declare the comparison statement
+for(int x = 0; [INPUT FIELD]; x++){
+  itemsToSend[x] = order[x];
+}
+
+Question 4:
+- Declare the statement inside the loop
+for(int x = 0; x < order.length; x++){
+  [INPUT FIELD];
+}
+
+- Declare the for loop expression
+for([INPUT FIELD]){
+  itemsToSend[x] = order[x];
+}
+
+
+Question 5:
+- Declare the whole loop (inside the loop, and expression)
+for([INPUT FIELD]){
+  [INPUT FIELD];
+}
