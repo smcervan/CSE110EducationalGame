@@ -26,6 +26,12 @@ public class ComputerProgram : MonoBehaviour
     public Question[] codingQuestions;
     public GameObject[] codingObjects = new GameObject[5];
 
+    public Customer selectedCustomer;
+
+    //Check Coding Question
+    public TMP_Text codingStatusText;
+    TMP_Text playerInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,9 +92,11 @@ public class ComputerProgram : MonoBehaviour
 
         //Customer Items
         Item[] currCustomerOrder = listOfCustomers[customerIndexValue].getOrder();
+        int i = 0;
         for(int x = 0; x < currCustomerOrder.Length; x++){
+            i = x + 1;
             GameObject itemChild = Instantiate(instantiatedTemplate, parentObject.transform);
-            itemChild.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = x.ToString() + ": " + currCustomerOrder[x].getName(); //Will set the name of the instantiated game object
+            itemChild.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = i.ToString() + ": " + currCustomerOrder[x].getName(); //Will set the name of the instantiated game object
             
         }
         
@@ -102,17 +110,17 @@ public class ComputerProgram : MonoBehaviour
 
     //Get current customer, display objects to selected Screen
     private void customerSelected(){
-        Customer currCustomer = listOfCustomers[customerTracker]; //This getting the current customer
-        Item[] currCustomerOrder = currCustomer.getOrder(); //Get the current customer's list of items
+        selectedCustomer = listOfCustomers[customerTracker]; //This getting the current customer
+        Item[] currCustomerOrder = selectedCustomer.getOrder(); //Get the current customer's list of items
 
-        for(int x = 0;x < currCustomerOrder.Length; x++){
+        for(int x = 0;x < currCustomerOrder.Length; x++){ //Moves the customer's list to the selcted display
             GameObject newSelectedItem = Instantiate(selectedItemTemplate, selectedObjectsParent);
             
             newSelectedItem.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = currCustomerOrder[x].getName();
             newSelectedItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = x.ToString();
         }
 
-        codingObjects[customerTracker].SetActive(true); //Sets the current coding problem visible
+        codingObjects[selectedCustomer.getQuestionIndex()].SetActive(true); //Sets the current coding problem visible
     }
 
     //When selecting the customers, will flush out previous data
@@ -132,15 +140,22 @@ public class ComputerProgram : MonoBehaviour
     }
 
     // ---------- Coding Question Screen ----------
+
         //For each customer, there will be a different question to add variety and practice
-    public void selectQuestions(){
-        CustomerCodeQuestion round1 = new CustomerCodeQuestion(listOfCustomers.Length); //Creates a new coding problem for each customer
-        codingQuestions = round1.getCodingQuestions(); //Gets the list of coding questions according to the customer's index
+    
+    public void checkButtonPressed(){
+        Debug.Log(selectedCustomer.getQuestionAnswer()); //Displays the answer, could be used when comparing the answers
+        //Gets input from the user
+        string userInput = codingObjects[selectedCustomer.getQuestionIndex()].transform.GetComponentInChildren<TextMeshProUGUI>().text.ToString();
+        
+
     }
 
+    //This is needed
     public void flushQuestion(){
         foreach(GameObject questionObject in codingObjects){
             questionObject.SetActive(false);
         }
     }
+
 }

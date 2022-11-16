@@ -88,3 +88,54 @@ Question 5:
 for([INPUT FIELD]){
   [INPUT FIELD];
 }
+
+
+//Checking the player's answer
+The player will be able to press the check button to see if they are correct, when they are correct, they will be taken to a screen that explains and "runs" the code.
+
+Implementation
+x Get coding status text object
+x Get the player input through the input text gameobject
+x Pass that text to the currentQuestions .checkAnswer() method.
+- If the method returns false, change the coding status text to red and say "Try Again"
+- If the method returns true, chage the coding status text to green and say "Correct!"
+- When the player is correct, go to the next "screen" which will explain the concept to the student and "run" through it
+
+Question A1 = new Question("0", "A1",questionObjects[0]);
+        Question B1 = new Question("<","B1",questionObjects[1]);
+        Question C1 = new Question("x++","C1",questionObjects[2]);
+        Question D1 = new Question("x","D1",questionObjects[3]);
+        Question E1 = new Question("x","E1",questionObjects[4]);
+    
+        Level 2
+        Question A2 = new Question("order.length", "A2");
+        Question B2 = new Question("int x = 0", "B2");
+    
+        Level 3
+        Question A3 = new Question("order[x]","A3");
+        Question B3 = new Question("itemsToSend[x]","B3");
+        Question C3 = new Question("x<order.length","C3");
+        
+        Level 4
+        Question A4 = new Question("itemsToSend[x]=order[x]","A4");
+        Question B4 = new Question("int x=0;x<order.length;x++","B4");
+        
+        Level 5
+        Question A5 = new Question("itemsToSend[x]=order[x]","int x=0;x<order.length;x++", "A5");
+
+        //Add the questions to the list
+        availableQuestions.Add(A1);
+        availableQuestions.Add(B1);
+        availableQuestions.Add(C1);
+        availableQuestions.Add(D1);
+        availableQuestions.Add(E1);
+        
+        availableQuestions.Add(A2);
+        availableQuestions.Add(B2);
+        availableQuestions.Add(A3);
+        availableQuestions.Add(B3);
+        availableQuestions.Add(C3);
+        availableQuestions.Add(A4);
+        availableQuestions.Add(B4);
+        availableQuestions.Add(A5);
+        */

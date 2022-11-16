@@ -54,42 +54,4 @@ public class DisplayOrderOnTablet : MonoBehaviour
         itemIndexText.text = indexValue.ToString(); // Updates the index text with the item's current index
         itemNameText.text = item.getName(); // Updates the name text with the item's name
     }
-
-
-    // (Could be used for computer navigation)
-    /* GUI Customer Navigation
-    void flushItemDisplay(){
-        for(int x = 0; x < containerDisplay.childCount; x++){
-            Destroy(containerDisplay.GetChild(x).gameObject);
-        }
-    }
-
-    
-    void showNavigationButtons(){
-        if(listOfCustomers.Length == 1){
-            navigationContainer.SetActive(false);
-        } else{
-            navigationContainer.SetActive(true);
-        }
-    }
-
-    public void nextCustomer(){
-        flushItemDisplay();
-        customerTracker++;
-        if(customerTracker >= listOfCustomers.Length){
-            customerTracker = 0;
-        }
-        displayCustomerOrder(customerTracker);
-    }
-
-    public void previousCustomer(){
-        flushItemDisplay();
-        customerTracker--;
-        if(customerTracker <= 0){
-            customerTracker = listOfCustomers.Length - 1;
-        }
-        displayCustomerOrder(customerTracker);
-    }
-    */
-
 }

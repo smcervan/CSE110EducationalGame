@@ -11,7 +11,7 @@ public class RoundCustomers
 {
 
     public Customer[] listOfCustomers; //Can now get the list of customers through dot notation
-    private int minCustomers = 1;
+    private int minCustomers = 3;
     private int maxCustomers = 6;
 
     public RoundCustomers(){
