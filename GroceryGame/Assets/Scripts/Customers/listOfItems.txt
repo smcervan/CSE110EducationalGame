@@ -2,7 +2,6 @@
 "apple", 0.15 , "fruit"
 "watermelon", 1.30, "fruit"
 "banana", 0.23 , "fruit"
-
 "celery", 1.40 , "fruit"
 "carrots", 2.00 , "fruit"
 "potato", 0.23 , "fruit"
