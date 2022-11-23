@@ -11,6 +11,12 @@ public class DisplayOrderOnTablet : MonoBehaviour
     public GameObject itemDisplay; //Instance Object
 
     public Customer[] listOfCustomers; //List of Customers
+    public GameObject computerObject;
+    private ComputerProgram computerScript;
+
+    private bool answeredCorrectlyScript;
+    //private bool uploadInfo;
+    private int selectedCustomer;
 
     //public int customerTracker = 0;
     //public GameObject navigationContainer;
@@ -19,19 +25,28 @@ public class DisplayOrderOnTablet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        computerScript = computerObject.GetComponent<ComputerProgram>();
+        listOfCustomers = computerScript.listOfCustomers;
+
         //displayCustomerOrder(0);
-        listOfCustomers = new RoundCustomers().listOfCustomers;
-        displayCustomerOrder(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //answeredCorrectlyScript = computerScript.playerCorrect;
+
+        if(answeredCorrectlyScript == true){
+            //uploadInfo = true;
+            selectedCustomer = computerScript.customerTracker;
+            displayCustomerOrder(selectedCustomer);
+        } else{
+            //uploadInfo = false; 
+        }
     }
 
     //Selecting a customer, getting their order, and passing it to the method that displays the order info
-    void displayCustomerOrder(int customerIndex){        
+    public void displayCustomerOrder(int customerIndex){        
         Customer currCustomer = listOfCustomers[customerIndex]; // Gets the customer index, selecting a customer 
         Item[] currCustomerOrder = currCustomer.getOrder(); // The currently selected customer's order
 
@@ -40,11 +55,10 @@ public class DisplayOrderOnTablet : MonoBehaviour
         for(int x = 0; x < currCustomerOrder.Length; x++){ //Cycles through the order, creating a new item GUI object (setUIInfo method)
             setGUIInfo(x, currCustomerOrder[x]); // Passes the index value, and the current item in the order according to the index value
         }
-
     }
 
     //Cycling through the customer's order, creating item containers, which display the item's content to player through GUI
-    void setGUIInfo(int indexValue, Item item){ //Creates individual item container
+    public void setGUIInfo(int indexValue, Item item){ //Creates individual item container
         GameObject itemObject = Instantiate(itemDisplay,containerDisplay); // Creates the container
         //itemObject.transform.SetParent(containerDisplay); // Sets the grid as the parent
 
