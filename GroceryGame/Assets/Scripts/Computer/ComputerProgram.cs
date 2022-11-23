@@ -45,6 +45,7 @@ public class ComputerProgram : MonoBehaviour
     [Header("Tablet Information")]
     public Transform containerDisplay; //The parent Object
     public GameObject itemDisplay; //Instance Object
+    public ScannerScript scannerScriptRef;
 
     // Start is called before the first frame update
     void Start()
@@ -178,7 +179,7 @@ public class ComputerProgram : MonoBehaviour
             //Send to tablet
             //Display sending screen animation
             displayCustomerOrder(customerTracker);
-
+            scannerScriptRef.orderSentOver = true;
 
         } else{
             //Set the status text to be red and change text
@@ -186,7 +187,7 @@ public class ComputerProgram : MonoBehaviour
             codingStatusText.text = "Incorrect!";
 
             //Keep on trying
-
+            scannerScriptRef.orderSentOver = false;
         }
 
         

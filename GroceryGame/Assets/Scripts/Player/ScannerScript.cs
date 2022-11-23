@@ -1,3 +1,10 @@
+/*
+ What this script does
+  - Adds functionality to scanner/tablet
+  - Scans objects
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,35 +16,49 @@ public class ScannerScript : MonoBehaviour
     private Camera _mainCamera;
     private Item[] customerOrder;
 
-    public GameObject objectHit;
+    GameObject objectHit;
 
+    public GameObject instructionScreen;
+    public GameObject customerOrderScreen;
+
+    public bool orderSentOver;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(computerScriptRef.currCustomerOrder);
+
+        orderSentOver = false;
+        instructionScreen.SetActive(true);
+        customerOrderScreen.SetActive(false);
+
         _mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Vector3 scanMode = new Vector3(0.5f,-0.45f,0.9f);
-        Vector3 zoomMode = new Vector3( 0.5f, -0.25f, 0.9f);
-        
-
-        if(Input.GetMouseButtonDown(0)){
-            scanItem(scan().name);
-        } 
         if(Input.GetMouseButton(1)){
-            Debug.Log("Zoom in");
-            gameObject.transform.localPosition = zoomMode;
-            transform.localRotation = Quaternion.Euler(-90f, 25f, 0f);
+            zoomTablet();
         } else{
-            gameObject.transform.localPosition = scanMode;
+            gameObject.transform.localPosition = new Vector3(0.5f,-0.45f,0.9f);
             transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
+        
+        //Player can scan Items
+        if(orderSentOver == true){
+            instructionScreen.SetActive(false);
+            customerOrderScreen.SetActive(true);
+
+            if(Input.GetMouseButtonDown(0)){
+                scanItem(scan().name);
+            } 
+        }
+    }
+
+    void zoomTablet(){
+        Vector3 zoomMode = new Vector3( 0.5f, -0.25f, 0.9f);
+        gameObject.transform.localPosition = zoomMode;
+        transform.localRotation = Quaternion.Euler(-90f, 25f, 0f);
     }
 
     //Checks to see if the item scanned in the order
