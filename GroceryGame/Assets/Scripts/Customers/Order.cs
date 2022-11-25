@@ -28,13 +28,13 @@ public class Order
         Item juice = new Item("juice", 3.00 , "refrigerated");
         Item cheese = new Item("cheese", 2.50 , "refrigerated");
         Item ham = new Item("ham", 2.50 , "refrigerated");
-        Item cold_Lunch = new Item("cold_Lunch", 4.50 , "refrigerated");
+        Item cold_Lunch = new Item("cold_lunch", 4.50 , "refrigerated");
         Item bacon = new Item("bacon", 4.50 , "refrigerated");
         Item pizza = new Item("pizza", 12.00 , "frozen");
         Item ice_cream = new Item("ice_cream", 6.00 , "frozen");
         Item lasagna = new Item("lasagna", 12.00 , "frozen");
         Item dino_nuggets = new Item("dino_nuggets", 15.00 , "frozen");
-        Item frozen_diner = new Item("frozen_diner", 12.00 , "frozen");
+        Item frozen_diner = new Item("frozen_dinner", 12.00 , "frozen");
         Item pizza_pockets = new Item("pizza_pockets", 10.00 , "frozen");
         Item chips = new Item("chips", 6.00 , "dry");
         Item crackers = new Item("crackers", 5.00 , "dry");

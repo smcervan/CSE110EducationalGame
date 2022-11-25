@@ -8,25 +8,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScannerScript : MonoBehaviour
 {
-
+    [Header("Object Variables")]
     public ComputerProgram computerScriptRef;
     private Camera _mainCamera;
     private Item[] customerOrder;
 
+    [Header("Raycast")]
     GameObject objectHit;
 
+    [Header("GUI for Tablet Screens")]
     public GameObject instructionScreen;
     public GameObject customerOrderScreen;
 
+    [Header("Order Logic Variables")]
     public bool orderSentOver;
+    public int currItemIndex = 0;
+
+    [Header("Tablet GUI Update")]
+    public Transform parentOfItemObjects;
 
     // Start is called before the first frame update
     void Start()
     {
-
         orderSentOver = false;
         instructionScreen.SetActive(true);
         customerOrderScreen.SetActive(false);
@@ -46,6 +53,7 @@ public class ScannerScript : MonoBehaviour
         
         //Player can scan Items
         if(orderSentOver == true){
+            customerOrder = computerScriptRef.currCustomerOrder;
             instructionScreen.SetActive(false);
             customerOrderScreen.SetActive(true);
 
@@ -71,7 +79,7 @@ public class ScannerScript : MonoBehaviour
         Raycast hit.
     */
 
-    //Send the raycast and and get the object name 
+    //Send the raycast and and get the object name that is being hit
     private GameObject scan(){
         RaycastHit hit;
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -96,13 +104,11 @@ public class ScannerScript : MonoBehaviour
 
     //Checks to see if the item is in the list, returns bool to scanItemMethod
     bool checkItemScanned(string target){
-        foreach(Item item in computerScriptRef.currCustomerOrder){
-            if(item.getName() == target){
-                Debug.Log(item.getName() + " = " + target);
-                return true;
-            }
+        if(target == customerOrder[currItemIndex].getName()){
+            Debug.Log("The correct item has been scanned");
+            currItemIndex++;
+            return true;
         }
-
         return false;
     }
 
@@ -115,4 +121,25 @@ public class ScannerScript : MonoBehaviour
     void scanError(){
         Debug.Log("Item not in bag, scan error");
     }
+
+    void setToSelected(){
+        Image indexValueImage = parentOfItemObjects.GetChild(currItemIndex).GetComponent<Image>();
+        indexValueImage.color = new Color32(34, 201, 236, 255);
+    }
+
+    void setToRecieved(){
+        Image indexValueImage = parentOfItemObjects.GetChild(currItemIndex).GetComponent<Image>();
+        indexValueImage.color = new Color32(132, 234, 112, 255);
+    }
 }
+
+/*
+
+Sets the index UI of the current item to blue,
+the player scans an object
+see if the scanned object lines up with the current item 
+if it does - move on to the next object,
+           - turn to green
+if it doesn't - does not match error
+
+*/

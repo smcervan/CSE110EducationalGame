@@ -14,7 +14,7 @@ public class Customer
         this.customerOrder = new Order(); //Creates new order, assigns the order to the customer list
         this.customerQuestion = new CustomerQuestion();
 
-        Debug.Log(customerName + "'s Question is : " + customerQuestion.getCustomerQuestionObject().getID());
+        //Debug.Log(customerName + "'s Question is : " + customerQuestion.getCustomerQuestionObject().getID());
     }
 
     public void printCustomerOrder(){

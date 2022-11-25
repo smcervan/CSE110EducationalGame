@@ -40,6 +40,7 @@ public class ComputerProgram : MonoBehaviour
     public GameObject sendingScreen;
     public GameObject logInScreen;
     public GameObject programInterface;
+    public GameObject playerGUI;
 
 
     [Header("Tablet Information")]
@@ -205,6 +206,7 @@ public class ComputerProgram : MonoBehaviour
         computerScreenGUI.SetActive(false);
         programInterface.SetActive(false);
         logInScreen.SetActive(true);
+        playerGUI.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
