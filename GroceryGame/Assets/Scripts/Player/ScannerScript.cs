@@ -26,7 +26,7 @@ public class ScannerScript : MonoBehaviour
 
     [Header("Order Logic Variables")]
     public bool orderSentOver;
-    public int currItemIndex = 0;
+    public int currItemIndex;
 
     [Header("Tablet GUI Update")]
     public Transform parentOfItemObjects;
@@ -39,6 +39,7 @@ public class ScannerScript : MonoBehaviour
         customerOrderScreen.SetActive(false);
 
         _mainCamera = Camera.main;
+        currItemIndex = 0;
     }
 
     // Update is called once per frame
@@ -58,7 +59,7 @@ public class ScannerScript : MonoBehaviour
             customerOrderScreen.SetActive(true);
 
             if(Input.GetMouseButtonDown(0)){
-                scanItem(scan().name);
+                scanItem(scan());
             } 
         }
     }
@@ -80,55 +81,46 @@ public class ScannerScript : MonoBehaviour
     */
 
     //Send the raycast and and get the object name that is being hit
-    private GameObject scan(){
+    private string scan(){
         RaycastHit hit;
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if(Physics.Raycast(ray, out hit)){
             objectHit = hit.transform.gameObject;
-            Debug.Log(objectHit.name);
         }
 
-        return objectHit;
+        return objectHit.name;
     }
     
 
+
     //According to the checkItemScanned(), the correct response will happen
-    void scanItem(string target){
-        if(checkItemScanned(target) == true){
+    void scanItem(string objectScannerHit){
+        if(objectScannerHit == customerOrder[currItemIndex].getName()){
             addToBag();
-        } else if(checkItemScanned(target) == false){
+        } else{
             scanError();
         }
     }
 
-    //Checks to see if the item is in the list, returns bool to scanItemMethod
-    bool checkItemScanned(string target){
-        if(target == customerOrder[currItemIndex].getName()){
-            Debug.Log("The correct item has been scanned");
-            currItemIndex++;
-            return true;
-        }
-        return false;
-    }
-
     //If item is on list
     void addToBag(){
-        Debug.Log("Item added to bag, check off list");
+        currItemIndex++;
+        Debug.Log("Added");
     }
 
     //If item is not on list
     void scanError(){
-        Debug.Log("Item not in bag, scan error");
+        Debug.Log("Error");
     }
 
-    void setToSelected(){
-        Image indexValueImage = parentOfItemObjects.GetChild(currItemIndex).GetComponent<Image>();
+    void setToSelected(int index){
+        Image indexValueImage = parentOfItemObjects.GetChild(index).GetComponent<Image>();
         indexValueImage.color = new Color32(34, 201, 236, 255);
     }
 
-    void setToRecieved(){
-        Image indexValueImage = parentOfItemObjects.GetChild(currItemIndex).GetComponent<Image>();
+    void setToRecieved(int index){
+        Image indexValueImage = parentOfItemObjects.GetChild(index).GetComponent<Image>();
         indexValueImage.color = new Color32(132, 234, 112, 255);
     }
 }
