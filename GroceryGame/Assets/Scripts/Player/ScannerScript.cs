@@ -62,6 +62,8 @@ public class ScannerScript : MonoBehaviour
                 scanItem(scan());
             } 
         }
+
+        Debug.Log(currItemIndex);
     }
 
     void zoomTablet(){
@@ -89,7 +91,11 @@ public class ScannerScript : MonoBehaviour
             objectHit = hit.transform.gameObject;
         }
 
-        return objectHit.name;
+        string objectName = objectHit.name;
+        string itemName = objectName.Substring(0, objectName.IndexOf(" "));
+
+        Debug.Log(itemName);
+        return itemName;
     }
     
 
@@ -98,6 +104,7 @@ public class ScannerScript : MonoBehaviour
     void scanItem(string objectScannerHit){
         if(objectScannerHit == customerOrder[currItemIndex].getName()){
             addToBag();
+            currItemIndex++;
         } else{
             scanError();
         }
@@ -105,7 +112,8 @@ public class ScannerScript : MonoBehaviour
 
     //If item is on list
     void addToBag(){
-        currItemIndex++;
+        Destroy(parentOfItemObjects.GetChild(0).gameObject);
+        Destroy(objectHit.gameObject);        
         Debug.Log("Added");
     }
 
